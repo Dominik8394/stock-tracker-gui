@@ -47,7 +47,7 @@ const Dashboard = () => {
     return (
         pending ?
             <React.Fragment>
-                <Container className="d-flex align-items-center justify-content-center flex-column"
+                <Container className="d-flex align-items-center justify-content-center flex-column flex-wrap"
                     style={{ minheight: "100vh" }}>
                     <div>
                         <h2 className="text-center mb-4">Das ist das Dashboard von {currentUser.email}</h2>

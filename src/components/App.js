@@ -10,6 +10,7 @@ import ForgotPassword from './login/ForgotPassword';
 import NewStockEntry from './stocks/NewStockEntry';
 
 function App() {
+
   return (
     // <Container className="d-flex align-items-center justify-content-center"
     //   style={{ minHeight: "100vh" }}>

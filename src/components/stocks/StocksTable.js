@@ -8,6 +8,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { Card, Button } from 'react-bootstrap';
 // import Snackbar from '@material-ui/core/Snackbar';
 // import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -27,19 +28,35 @@ const StocksTable = (props) => {
     // }
 
     return (
-        props.data ?
-           
-        <React.Fragment>
-            <Alert variant="info" className="text-center">
-                Leider verfügen wir derzeit über keine Informationen zu 
+        !props.data ?
+            <React.Fragment>
+                <Alert variant="info" className="text-center">
+                    Leider verfügen wir derzeit über keine Informationen zu
                     deinem Bestand. Füge gleich deine erste <Link to="/new-entry">Transaktion</Link> hinzu!
-            </Alert>
-        </React.Fragment>
-        
-        :
+                </Alert>
+            </React.Fragment>
+
+            :
 
             <React.Fragment>
-                <TableContainer component={Paper}>
+                <div className="d-flex justify-content-evenly align-items-center flex-wrap flex-row" style={{"minWidth": "100%"}}>
+                {
+                    props.data.map((item, key) => (
+                        <Card style={{ width: '20rem' }}>
+                            <Card.Body>
+                                <Card.Title>{item.title}</Card.Title>
+                                <Card.Text>
+                                    <p>ISIN: {item.isin}</p>
+                                    <p>Bought at: {item.boughtAt}</p>
+                                    <p>Amount: {item.amount}</p>
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    ))
+                }
+                </div>
+
+                {/* <TableContainer component={Paper}>
                     <Table className="table" size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
@@ -82,7 +99,7 @@ const StocksTable = (props) => {
                             }
                         </TableBody>
                     </Table>
-                </TableContainer>
+                </TableContainer> */}
                 {/* <div>
                     {
                         error && <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}
