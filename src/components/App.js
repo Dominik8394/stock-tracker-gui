@@ -9,6 +9,8 @@ import PrivateRoute from './routes/PrivateRoute';
 import ForgotPassword from './login/ForgotPassword';
 import NewStockEntry from './stocks/NewStockEntry';
 
+import Menu from './menu/Menu';
+
 function App() {
 
   return (
@@ -17,6 +19,7 @@ function App() {
     //   <div className="w-100" style={{ maxWidth: "400px" }}>
     <Router>
       <AuthProvider>
+        <Menu />
         <Switch>
           <PrivateRoute exact path="/" component={Dashboard} />
           <PrivateRoute path="/new-entry" component={NewStockEntry} />

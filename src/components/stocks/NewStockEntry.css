@@ -1,0 +1,14 @@
+.card-bg-cm {
+    background-color: #2f3042 !important;
+    color: #fff;
+}
+
+.input-control-cm {
+    color: #fff !important;
+    background-color: #332c3e !important;
+    border: 1px solid #383242 !important;
+}
+
+.btn-w-cm {
+    width: 48%;
+}

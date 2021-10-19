@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Alert } from 'react-bootstrap';
 import { useAuth } from '../../contexts/AuthContext';
 import { useHistory } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
-import StocksTable from '../stocks/StocksTable';
-import { Link } from 'react-router-dom';
+import ErrorView from './ErrorView';
+import DashboardContent from './DashboardContent';
 
 import { getStockInformationByUser } from '../api/StocksHttp';
 
@@ -34,6 +32,10 @@ const Dashboard = () => {
 
     }, []);
 
+    /*
+    /* The user will be logged out of the current session and
+    /* routed back to the login view.
+    */
     async function handleLogout() {
         setError('');
         try {
@@ -47,32 +49,11 @@ const Dashboard = () => {
     return (
         pending ?
             <React.Fragment>
-                <Container className="d-flex align-items-center justify-content-center flex-column flex-wrap"
-                    style={{ minheight: "100vh" }}>
-                    <div>
-                        <h2 className="text-center mb-4">Das ist das Dashboard von {currentUser.email}</h2>
-                        <Alert variant="warning" className="text-center">
-                            Es scheint als gebe es ein Problem ({error.toString()}).
-                            <br />
-                            Bitte versuche es später nocheinmal!
-                        </Alert>
-                    </div>
-                </Container>
-            </React.Fragment> :
+                <DashboardContent stocks={stockData} logoutHandler={handleLogout} />
+            </React.Fragment>
+            :
             <React.Fragment>
-                <Container className="d-flex align-items-center justify-content-center"
-                    style={{ minHeight: "100vh" }}>
-                    <div>
-                        <h2 className="text-center mb-4">Das ist das Dashboard von {currentUser.email}</h2>
-
-                        <StocksTable data={stockData} />
-
-                        <div className="w-100 text-center mt-2">
-                            <Button onClick={handleLogout}>Log Out</Button>
-                            <Link className="btn btn-primary ml-2" role="button" to="/new-entry">Neuer Eintrag </Link>
-                        </div>
-                    </div>
-                </Container>
+                <ErrorView errorMsg={error} />
             </React.Fragment>
     );
 }

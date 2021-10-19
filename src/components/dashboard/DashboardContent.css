@@ -1,0 +1,15 @@
+.container-cm {
+    height: 100vh;
+}
+
+.overview-container, .vis-container {
+    height: 50%;
+    width: 49.5%;
+    background-color: #2f3042;
+}
+
+.btn-add {
+    color: #fff;
+    background-color: #0177fb !important;
+    border-color:#0177fb !important;
+}

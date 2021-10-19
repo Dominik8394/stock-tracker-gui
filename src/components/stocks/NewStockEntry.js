@@ -1,12 +1,23 @@
 import React, { useState, useRef } from 'react';
+
+// Bootstrap imports
 import { Card, Button, Form } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
-import Snackbar from '@material-ui/core/Snackbar';
+import './NewStockEntry.css';
 
+// MaterialUI imports
+import Snackbar from '@material-ui/core/Snackbar';
+import TextField from '@mui/material/TextField';
+import { styled } from '@mui/material/styles';
+
+// Context imports
+import { useAuth } from '../../contexts/AuthContext';
+
+// Component imports
 import { createStockInformation } from '../api/StocksHttp';
 
 const NewStockEntry = () => {
+
     /* Setting up states */
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -24,6 +35,29 @@ const NewStockEntry = () => {
     const transactionCostRef = useRef();
     const totalInvestRef = useRef();
     const costRef = useRef();
+
+    const CssTextField = styled(TextField)({
+        '& label.Mui-focused': {
+            color: 'white',
+        },
+        '& .MuiInputBase-input': {
+            input: 'white'
+        },
+        '& .MuiInput-underline:after': {
+            borderBottomColor: 'white',
+        },
+        '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+                borderColor: 'white',
+            },
+            '&:hover fieldset': {
+                borderColor: 'white',
+            },
+            '&.Mui-focused fieldset': {
+                borderColor: 'white',
+            },
+        },
+    });
 
     /**
     * Perform an http request to create a new stock table entry.
@@ -79,40 +113,54 @@ const NewStockEntry = () => {
     return (
         <React.Fragment>
             <div className="d-flex justify-content-center mt-4">
-                <Card>
-                    <Card.Body>
-                        <h3 className="text-center mb-4 mt-2">Erstelle eine neue Transaktion</h3>
+                <Card className="card-bg-cm" style={{ width: '650px' }}>
+                    <Card.Body style={{ width: '65%', margin: 'auto' }}>
+                        <Card.Header as='h3' style={{ textAlign: 'center', marginBottom: '25px', borderBottom: '1px solid white', background: 'none' }}>
+                            Neuer Eintrag
+                        </Card.Header>
                         <Form onSubmit={handleSubmit}>
                             <Form.Group>
-                                <Form.Label>ISIN</Form.Label>
-                                <Form.Control type="text" ref={isinRef} required />
+                                <CssTextField InputLabelProps={{
+                                    style: { color: '#fff' }
+                                }}
+                                    fullWidth id="outlined-basic" label="ISIN" variant="outlined" ref={isinRef} required />
                             </Form.Group>
                             <Form.Group>
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control type="text" ref={nameRef} required />
+                                <CssTextField InputLabelProps={{
+                                    style: { color: '#fff' }
+                                }} fullWidth id="outlined-basic" label="Name" variant="outlined" ref={isinRef} required />
                             </Form.Group>
                             <Form.Group>
-                                <Form.Label>Gekauft am</Form.Label>
-                                <Form.Control type="date" ref={dateRef} required />
+                                <CssTextField InputLabelProps={{
+                                    style: { color: '#fff' }
+                                }} fullWidth id="outlined-basic" label="Gekauft am" variant="outlined" ref={isinRef} required />
                             </Form.Group>
                             <Form.Group>
-                                <Form.Label>Anzahl</Form.Label>
-                                <Form.Control type="number" ref={amountRef} required />
+                                <CssTextField InputLabelProps={{
+                                    style: { color: '#fff' }
+                                }} fullWidth id="outlined-basic" label="Anzahl" variant="outlined" ref={isinRef} required />
                             </Form.Group>
                             <Form.Group>
-                                <Form.Label>Kurs</Form.Label>
-                                <Form.Control type="number" ref={costRef} required />
+                                <CssTextField InputLabelProps={{
+                                    style: { color: '#fff' }
+                                }} fullWidth id="outlined-basic" label="Kurs" variant="outlined" ref={isinRef} required />
                             </Form.Group>
                             <Form.Group>
-                                <Form.Label>Transaktionskosten</Form.Label>
-                                <Form.Control type="number" ref={transactionCostRef} required />
+                                <CssTextField InputLabelProps={{
+                                    style: { color: '#fff' }
+                                }} fullWidth id="outlined-basic" label="Transaktionskosten" variant="outlined" ref={isinRef} required />
                             </Form.Group>
                             <Form.Group>
-                                <Form.Label>Gesamtinvestment</Form.Label>
-                                <Form.Control type="number" ref={totalInvestRef} required />
+                                <CssTextField InputLabelProps={{
+                                    style: { color: '#fff' }
+                                }} fullWidth id="outlined-basic" label="Gesamtinvestment" variant="outlined" ref={isinRef} required />
                             </Form.Group>
-                            <Button onClick={goBack} className="w-50 btn-secondary">Zurück</Button>
-                            <Button disabled={loading} className="w-50" type="submit">Erstellen</Button>
+                            <Card.Footer style={{ textAlign: 'center', borderTop: '1px solid white', background: 'none' }} >
+                                <div className="d-flex align-items-center justify-content-between">
+                                    <Button onClick={goBack} className="btn-w-cm btn-secondary">Zurück</Button>
+                                    <Button disabled={loading} className="btn-w-cm" type="submit">Erstellen</Button>
+                                </div>
+                            </Card.Footer>
                         </Form>
                     </Card.Body>
                 </Card>

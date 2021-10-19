@@ -1,16 +1,21 @@
 import React from 'react';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+
+// Material ui imports
+import Box from '@mui/material/Box';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import { FixedSizeList } from 'react-window';
+
+// import Snackbar from '@material-ui/core/Snackbar';
+// import CircularProgress from '@material-ui/core/CircularProgress';
+
+// Bootstrap imports
 import { Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Card, Button } from 'react-bootstrap';
-// import Snackbar from '@material-ui/core/Snackbar';
-// import CircularProgress from '@material-ui/core/CircularProgress';
+
+
 
 import './StocksTable.css';
 
@@ -27,6 +32,9 @@ const StocksTable = (props) => {
     //     setOpen(false);
     // }
 
+
+
+
     return (
         !props.data ?
             <React.Fragment>
@@ -39,67 +47,21 @@ const StocksTable = (props) => {
             :
 
             <React.Fragment>
-                <div className="d-flex justify-content-evenly align-items-center flex-wrap flex-row" style={{"minWidth": "100%"}}>
-                {
-                    props.data.map((item, key) => (
-                        <Card style={{ width: '20rem' }}>
-                            <Card.Body>
-                                <Card.Title>{item.title}</Card.Title>
-                                <Card.Text>
-                                    <p>ISIN: {item.isin}</p>
-                                    <p>Bought at: {item.boughtAt}</p>
-                                    <p>Amount: {item.amount}</p>
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                    ))
-                }
-                </div>
+                <h3 className="text-center mb-5" style={{color: 'white'}}>Überblick</h3>
+                <Box
+                    sx={{ width: '100%', height: 400, maxWidth: '95%', bgcolor: '#2f3042', color: 'white', marginBottom: '25px' }}
+                >
+                    <FixedSizeList
+                        height={400}
+                        width={'100%'}
+                        itemSize={46}
+                        itemCount={5}
+                        overscanCount={5}
+                    >
+                        {renderRow}
+                    </FixedSizeList>
+                </Box>
 
-                {/* <TableContainer component={Paper}>
-                    <Table className="table" size="small" aria-label="a dense table">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>ISIN</TableCell>
-                                <TableCell align="right">Name</TableCell>
-                                <TableCell align="right">Gekauft am&nbsp;(Datum)</TableCell>
-                                <TableCell align="right">Anzahl</TableCell>
-                                <TableCell align="right">Preis&nbsp;(€)</TableCell>
-                                <TableCell align="right">Transaktionsgebühr&nbsp;(€)</TableCell>
-                                <TableCell align="right">Insgesamt&nbsp;(€)</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {
-                                props.data.map((item, key) => (
-                                    <TableRow key={key}>
-                                        <TableCell component="th" scope="row">
-                                            {item.isin}
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            {item.title}
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            {item.boughtAt}
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            {item.amount}
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            {item.cost}
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            {item.fee}
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            {item.totalAmount}
-                                        </TableCell>
-                                    </TableRow>
-                                ))
-                            }
-                        </TableBody>
-                    </Table>
-                </TableContainer> */}
                 {/* <div>
                     {
                         error && <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}
@@ -119,3 +81,19 @@ const StocksTable = (props) => {
 }
 
 export default StocksTable;
+
+const renderRow = (props) => {
+    const { index, style } = props;
+
+    return (
+        <ListItem style={style} key={index} component="div" disablePadding>
+            <ListItemButton>
+                <ListItemText primary={`AT&T`} />
+                <ListItemText primary={`25`} />
+                <ListItemText primary={`21.28`} />
+                <ListItemText primary={`20.02.2021`} />
+            </ListItemButton>
+        </ListItem>
+    );
+}
+
