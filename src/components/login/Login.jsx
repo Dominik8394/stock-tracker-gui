@@ -4,7 +4,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { Link, useHistory } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
-import { serverIsUp } from '../api/Utils';
+// import { serverIsUp } from '../api/Utils';
 
 export default function SignUp() {
 
@@ -22,7 +22,7 @@ export default function SignUp() {
         try {
             setError('');
             setLoading(true);
-            await serverIsUp();
+            // await serverIsUp();
             await login(emailRef.current.value, passwordRef.current.value);
 
             history.push("/");

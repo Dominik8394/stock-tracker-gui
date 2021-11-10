@@ -21,7 +21,7 @@ const Menu = () => {
                     Stock Tracker
                 </Navbar.Brand>
                 <Nav className="me-auto">
-                    <Nav.Link href="#home">Willkommen, {currentUser.email} </Nav.Link>
+                    {/* <Nav.Link href="#home">Willkommen, {currentUser.email} </Nav.Link> */}
                     <Nav.Link href="/">Dashboard</Nav.Link>
                     {
                         currentUser ?

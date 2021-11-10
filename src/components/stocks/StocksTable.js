@@ -1,19 +1,9 @@
 import React from 'react';
 
-// Material ui imports
-import Box from '@mui/material/Box';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import { FixedSizeList } from 'react-window';
-
-// import Snackbar from '@material-ui/core/Snackbar';
-// import CircularProgress from '@material-ui/core/CircularProgress';
-
 // Bootstrap imports
 import { Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { Card, Button } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
 
 
@@ -21,19 +11,6 @@ import './StocksTable.css';
 
 
 const StocksTable = (props) => {
-
-    // const [open, setOpen] = useState(false);
-    // const [error, setError] = useState('');
-
-    // const handleClose = (event, reason) => {
-    //     if (reason === 'clickaway') {
-    //         return;
-    //     }
-    //     setOpen(false);
-    // }
-
-
-
 
     return (
         !props.data ?
@@ -47,53 +24,40 @@ const StocksTable = (props) => {
             :
 
             <React.Fragment>
-                <h3 className="text-center mb-5" style={{color: 'white'}}>Überblick</h3>
-                <Box
-                    sx={{ width: '100%', height: 400, maxWidth: '95%', bgcolor: '#2f3042', color: 'white', marginBottom: '25px' }}
-                >
-                    <FixedSizeList
-                        height={400}
-                        width={'100%'}
-                        itemSize={46}
-                        itemCount={5}
-                        overscanCount={5}
-                    >
-                        {renderRow}
-                    </FixedSizeList>
-                </Box>
-
-                {/* <div>
-                    {
-                        error && <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}
-                            message={error}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                        >
-                        </Snackbar>
-                    }
-
-                </div> */}
+                <div className="table-container mt-3">
+                    <Table responsive striped bordered hover variant="dark">
+                        <thead>
+                            <tr>
+                                <th>ISIN</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Bought At</th>
+                                <th>Amount</th>
+                                <th>Transaction Costs</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                props.data.map((item, index) => (
+                                    <tr key={index}>
+                                        <td>{item.isin}</td>
+                                        <td>{item.name}</td>
+                                        <td>{item.price}</td>
+                                        <td>{item.boughtAt}</td>
+                                        <td>{item.amount}</td>
+                                        <td>{item.transaction}</td>
+                                        <td>{item.totalAmount}</td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </Table>
+                </div>
             </React.Fragment>
 
     );
 }
 
 export default StocksTable;
-
-const renderRow = (props) => {
-    const { index, style } = props;
-
-    return (
-        <ListItem style={style} key={index} component="div" disablePadding>
-            <ListItemButton>
-                <ListItemText primary={`AT&T`} />
-                <ListItemText primary={`25`} />
-                <ListItemText primary={`21.28`} />
-                <ListItemText primary={`20.02.2021`} />
-            </ListItemButton>
-        </ListItem>
-    );
-}
 

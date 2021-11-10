@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Bootstrap imports
-import { Button, Alert, Container } from 'react-bootstrap';
+import { Alert, Container } from 'react-bootstrap';
 import './DashboardContent.css';
 
 // React router imports
@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 
 // Component imports
 import StocksTable from '../stocks/StocksTable.js';
+import BarChart from './BarChart';
 
 const DashboardContent = ({ stocks, logoutHandler }) => {
 
@@ -16,36 +17,75 @@ const DashboardContent = ({ stocks, logoutHandler }) => {
     let info = null;
     console.log("Stocks prop >>", stocks);
 
+    const data = [
+        {
+            isin: 12131313131,
+            name: 'AT&T',
+            price: 22.23,
+            boughtAt: new Date().toISOString().slice(0, 10),
+            amount: 2,
+            transaction: 1.00,
+            total: 45.23
+        },
+        {
+            isin: 12131313131,
+            name: 'AT&T',
+            price: 22.23,
+            boughtAt: new Date().toISOString().slice(0, 10),
+            amount: 2,
+            transaction: 1.00,
+            total: 45.23
+        },
+        {
+            isin: 12131313131,
+            name: 'AT&T',
+            price: 22.23,
+            boughtAt: new Date().toISOString().slice(0, 10),
+            amount: 2,
+            transaction: 1.00,
+            total: 45.23
+        }
+    ]
+
     return (
         <React.Fragment>
             <Container className="d-flex align-items-center 
-            justify-content-between container-cm" style={{ "maxWidth": "100%" }}>
+            justify-content-center flex-row" style={{ "maxWidth": "100%" }}>
 
-
-                <div className="d-flex align-items-center 
-            justify-content-center vis-container">
-                    {
-                        (stocks.length <= 0) ?
-                            (
-                                info = <Alert variant="warning" className="text-center">
-                                    Leider liegen keine Daten vor.
-                                </Alert>
-                            )
-                            : info
-                    }
-                </div>
-
-                <div className="d-flex align-items-center justify-content-center overview-container flex-column">
+                <div className="stocks-view">
                     <StocksTable data={stocks} />
-                    
+
                     {
                         stocks ?
                             (
-                                btn = <Link className="btn-add btn-primary btn ml-2" role="button" to="/new-entry">Hinzufügen</Link>
+                                btn = <Link className="btn-add btn-primary btn mb-5" role="button" to="/new-entry">Hinzufügen</Link>
                             ) : btn
                     }
+                <div className="d-flex align-items-center justify-content-between flex-row metrics-container">
+                    <div className="d-flex align-items-center justify-content-center vis-container">
+                        {
+                            (stocks.length <= 0) ?
+                                (
+                                    info = <Alert variant="warning" className="text-center">
+                                        Leider liegen keine Daten vor.
+                                    </Alert>
+                                )
+                                    : <BarChart />
+                        }
+                    </div>
 
-
+                    <div className="d-flex align-items-center justify-content-center overview-container">
+                            {
+                                (stocks.length >= 0) ?
+                                    (
+                                        info = <Alert variant="warning" className="text-center">
+                                            Leider liegen keine Daten vor.
+                                        </Alert>
+                                    )
+                                    : info
+                            }
+                    </div>
+                </div>
                 </div>
 
 

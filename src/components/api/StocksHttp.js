@@ -29,26 +29,27 @@ export const getStockInformationByUser = (email) => {
  * Creates a new entry, i.e., a purchase or sell for a particular user.
  * 
  * @param {isin} ISIN of a particular stock 
- * @param {title} title of the stock, commonly name of the company
+ * @param {name} title of the stock, commonly name of the company
  * @param {boughtAt} date of the time when the purchase or sell happened
  * @param {amount} amount of stocks that have been purchased/sold 
- * @param {cost} cost of a single stock 
- * @param {fee} fee for the transaction 
+ * @param {Transaction} transaction costs of a single stock 
+ * @param {Price} fee for the transaction 
  * @param {totalAmount} calculated cost for the investment,i.e., cost + fee. 
  * @param {user} user who performed the transaction
  * @returns Http status 201 if successful
  */
-export const createStockInformation = (isin, nameRef, dateRef, amountRef, transactionCostRef, costRef, totalInvestRef, email) => {
-    console.log(`${nameRef}`);
-    return axios.post('http://localhost:3001/api/stock', {
+export const createStockInformation = ({ISIN, Name, Date, Amount, Transaction, Price, Total}, email) => {
+    console.log("Inside request...");
+    
+    return axios.post('http://localhost:3001/api/stock`', {
         data: {
-            isin: isin,
-            title: nameRef,
-            boughtAt: dateRef,
-            amount: amountRef,
-            cost: transactionCostRef,
-            fee: costRef,
-            totalAmount: totalInvestRef,
+            isin: ISIN,
+            name: Name,
+            boughtAt: Date,
+            amount: Amount,
+            transaction: Transaction,
+            price: Price,
+            totalAmount: Total,
             user: email
         }
     })

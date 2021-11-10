@@ -17,13 +17,15 @@ const Dashboard = () => {
 
     const history = useHistory();
 
-    useEffect(async () => {
+    useEffect(() => {
         setPending(true);
         try {
-            const response = await getStockInformationByUser(currentUser.email);
-            setPending(false);
-            setStockData(response);
-            console.log(`Response data ${JSON.stringify(response)}`);
+            (async function fetchData() {
+                const response = await getStockInformationByUser(currentUser.email);
+                setPending(false);
+                setStockData(response);
+                console.log(`Response data ${JSON.stringify(response)}`);
+            })();
 
         } catch (err) {
             setError(err);
@@ -47,7 +49,7 @@ const Dashboard = () => {
     }
 
     return (
-        pending ?
+        !pending ?
             <React.Fragment>
                 <DashboardContent stocks={stockData} logoutHandler={handleLogout} />
             </React.Fragment>

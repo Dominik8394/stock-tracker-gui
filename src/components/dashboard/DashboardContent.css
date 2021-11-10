@@ -3,8 +3,8 @@
 }
 
 .overview-container, .vis-container {
-    height: 50%;
-    width: 49.5%;
+    height: 100%;
+    width: 49%;
     background-color: #2f3042;
 }
 
@@ -12,4 +12,12 @@
     color: #fff;
     background-color: #0177fb !important;
     border-color:#0177fb !important;
+}
+
+.stocks-view {
+    width: 90%;
+}
+
+.metrics-container {
+    height: 50vh;
 }

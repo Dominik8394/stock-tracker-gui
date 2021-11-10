@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 
 // Bootstrap imports
 import { Card, Button, Form } from 'react-bootstrap';
@@ -7,8 +7,6 @@ import './NewStockEntry.css';
 
 // MaterialUI imports
 import Snackbar from '@material-ui/core/Snackbar';
-import TextField from '@mui/material/TextField';
-import { styled } from '@mui/material/styles';
 
 // Context imports
 import { useAuth } from '../../contexts/AuthContext';
@@ -18,80 +16,46 @@ import { createStockInformation } from '../api/StocksHttp';
 
 const NewStockEntry = () => {
 
+    console.log("rendering...");
+
     /* Setting up states */
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState('');
     const [open, setOpen] = useState(false);
+    const [values, setValues] = useState({
+        ISIN: '',
+        Name: '',
+        Date: new Date().toISOString().slice(0, 10),
+        Amount: 1,
+        Price: 0,
+        Total: 0,
+        Transaction: 0
+    });
 
     const { currentUser } = useAuth();
     const history = useHistory();
 
-    /* Setting up references */
-    const isinRef = useRef();
-    const nameRef = useRef();
-    const dateRef = useRef();
-    const amountRef = useRef();
-    const transactionCostRef = useRef();
-    const totalInvestRef = useRef();
-    const costRef = useRef();
-
-    const CssTextField = styled(TextField)({
-        '& label.Mui-focused': {
-            color: 'white',
-        },
-        '& .MuiInputBase-input': {
-            input: 'white'
-        },
-        '& .MuiInput-underline:after': {
-            borderBottomColor: 'white',
-        },
-        '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-                borderColor: 'white',
-            },
-            '&:hover fieldset': {
-                borderColor: 'white',
-            },
-            '&.Mui-focused fieldset': {
-                borderColor: 'white',
-            },
-        },
-    });
 
     /**
     * Perform an http request to create a new stock table entry.
     */
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        console.log("Submitting...");
 
         try {
             setLoading(true);
-            const isin = isinRef.current.value,
-                title = nameRef.current.value,
-                boughtAt = dateRef.current.value,
-                amount = amountRef.current.value,
-                cost = transactionCostRef.current.value,
-                fee = costRef.current.value,
-                totalAmount = totalInvestRef.current.value;
+            const responseStatus = await createStockInformation({...values}, currentUser.email);
 
-
-            const responseStatus = await createStockInformation(
-                isin,
-                title,
-                boughtAt,
-                amount,
-                cost,
-                fee,
-                totalAmount,
-                currentUser.email
-            );
             console.info(`Response of http post request: ${responseStatus}`);
             setSuccess('Toll! Deine Transaktion wurde erstellt');
             setOpen(true);
             history.push("/");
         } catch (err) {
             setError(`Failed to send data to server: ${err}`);
+            setOpen(true);
         }
 
         setLoading(false);
@@ -106,8 +70,12 @@ const NewStockEntry = () => {
         if (reason === 'clickaway') {
             return;
         }
-
         setOpen(false);
+    }
+
+    const onChange = (e) => {
+        e.preventDefault();
+        setValues({ ...values, [e.target.name]: e.target.value })
     }
 
     return (
@@ -120,40 +88,32 @@ const NewStockEntry = () => {
                         </Card.Header>
                         <Form onSubmit={handleSubmit}>
                             <Form.Group>
-                                <CssTextField InputLabelProps={{
-                                    style: { color: '#fff' }
-                                }}
-                                    fullWidth id="outlined-basic" label="ISIN" variant="outlined" ref={isinRef} required />
+                                <label>ISIN</label>
+                                <input key={1} onChange={onChange} name="ISIN" value={values.ISIN} type="number" />
                             </Form.Group>
                             <Form.Group>
-                                <CssTextField InputLabelProps={{
-                                    style: { color: '#fff' }
-                                }} fullWidth id="outlined-basic" label="Name" variant="outlined" ref={isinRef} required />
+                                <label>Name</label>
+                                <input key={2} onChange={onChange} name="Name" value={values.Name} type="text" />
                             </Form.Group>
                             <Form.Group>
-                                <CssTextField InputLabelProps={{
-                                    style: { color: '#fff' }
-                                }} fullWidth id="outlined-basic" label="Gekauft am" variant="outlined" ref={isinRef} required />
+                                <label>Date</label>
+                                <input key={3} onChange={onChange} name="Date" value={values.Date} type="date" />
                             </Form.Group>
                             <Form.Group>
-                                <CssTextField InputLabelProps={{
-                                    style: { color: '#fff' }
-                                }} fullWidth id="outlined-basic" label="Anzahl" variant="outlined" ref={isinRef} required />
+                                <label>Amount</label>
+                                <input key={4} onChange={onChange} name="Amount" value={values.Amount} type="number" />
                             </Form.Group>
                             <Form.Group>
-                                <CssTextField InputLabelProps={{
-                                    style: { color: '#fff' }
-                                }} fullWidth id="outlined-basic" label="Kurs" variant="outlined" ref={isinRef} required />
+                                <label>Price</label>
+                                <input key={5} onChange={onChange} name="Price" value={values.Price} type="number" />
                             </Form.Group>
                             <Form.Group>
-                                <CssTextField InputLabelProps={{
-                                    style: { color: '#fff' }
-                                }} fullWidth id="outlined-basic" label="Transaktionskosten" variant="outlined" ref={isinRef} required />
+                                <label>Transaction Costs</label>
+                                <input key={6} onChange={onChange} name="Transaction" value={values.Transaction} type="number" />
                             </Form.Group>
                             <Form.Group>
-                                <CssTextField InputLabelProps={{
-                                    style: { color: '#fff' }
-                                }} fullWidth id="outlined-basic" label="Gesamtinvestment" variant="outlined" ref={isinRef} required />
+                                <label>Total Costs</label>
+                                <input key={7} onChange={onChange} name="Total" value={values.Total} type="number" />
                             </Form.Group>
                             <Card.Footer style={{ textAlign: 'center', borderTop: '1px solid white', background: 'none' }} >
                                 <div className="d-flex align-items-center justify-content-between">
