@@ -42,7 +42,7 @@ const StocksTable = (props) => {
                                 props.data.map((item, index) => (
                                     <tr key={index}>
                                         <td>{item.isin}</td>
-                                        <td>{item.name}</td>
+                                        <td>{item.name || item.title}</td>
                                         <td>{item.price}</td>
                                         <td>{item.boughtAt}</td>
                                         <td>{item.amount}</td>

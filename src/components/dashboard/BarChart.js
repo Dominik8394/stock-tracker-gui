@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 
 import { Bar, Chart } from 'react-chartjs-2';
 

@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 // Component imports
 import StocksTable from '../stocks/StocksTable.js';
 import BarChart from './BarChart';
+import PieChart from './PieChart';
 
 const DashboardContent = ({ stocks, logoutHandler }) => {
 
@@ -76,13 +77,13 @@ const DashboardContent = ({ stocks, logoutHandler }) => {
 
                     <div className="d-flex align-items-center justify-content-center overview-container">
                             {
-                                (stocks.length >= 0) ?
+                                (stocks.length <= 0) ?
                                     (
                                         info = <Alert variant="warning" className="text-center">
                                             Leider liegen keine Daten vor.
                                         </Alert>
                                     )
-                                    : info
+                                    : <PieChart stocks={stocks} />
                             }
                     </div>
                 </div>
