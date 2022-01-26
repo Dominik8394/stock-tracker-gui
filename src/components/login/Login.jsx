@@ -40,8 +40,8 @@ export default function SignUp() {
             <Container className="d-flex align-items-center justify-content-center"
                 style={{ minHeight: "100vh" }}>
                 <div className="w-100" style={{ maxWidth: "400px" }}>
-                    <Card>
-                        <Card.Body>
+                    <Card style={{ backgroundColor: "#383b53"}}>
+                        <Card.Body style={{ color: "white"}}>
                             <h2 className="text-center mb-4">Log In</h2>
                             {error && <Alert variant="danger">{error}</Alert>}
                             <Form onSubmit={handleSubmit}>
@@ -61,7 +61,7 @@ export default function SignUp() {
                             </div>
                         </Card.Body>
                     </Card>
-                    <div className="w-100 text-center mt-2">
+                    <div className="w-100 text-center mt-2" style={{ color: "white"}}>
                         Need an Account? <Link to="/signup">Sign Up</Link>
                     </div>
                 </div>
