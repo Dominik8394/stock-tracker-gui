@@ -1,12 +1,14 @@
 import axios from 'axios';
 
+const url = 'https://' + 'stocktracker-api.herokuapp.com';
+
 /**
  * Retrieves all stock information from the server.
  * Only for testing purposes!
  * @returns array of stock data
  */
 export const getStockInformation = () => {
-    return axios.get('http://localhost:3001/api/stocks')
+    return axios.get(url + '/api/stocks')
         .then(res => {
             return res.data;
         });
@@ -19,7 +21,7 @@ export const getStockInformation = () => {
  * @returns list of stock data regards a particular user
  */
 export const getStockInformationByUser = (email) => {
-    return axios.get('http://localhost:3001/api/stocks/' + email)
+    return axios.get(url + '/api/stocks/' + email)
         .then(res => {
             return res.data;
         });
@@ -41,7 +43,7 @@ export const getStockInformationByUser = (email) => {
 export const createStockInformation = ({ISIN, Name, Date, Amount, Transaction, Price, Total}, email) => {
     console.log("Inside request...");
     
-    return axios.post('http://localhost:3001/api/stock`', {
+    return axios.post(url + '/api/stock`', {
         data: {
             isin: ISIN,
             name: Name,
