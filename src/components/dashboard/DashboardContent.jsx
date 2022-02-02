@@ -20,7 +20,7 @@ const DashboardContent = ({ stocks, logoutHandler }) => {
     return (
         <React.Fragment>
             <Container className="d-flex align-items-center 
-            justify-content-center flex-row" style={{ "maxWidth": "100%" }}>
+            justify-content-center flex-row" style={{ "maxWidth": "75%", "minWidth": "0%" }}>
 
                 <div className="stocks-view">
                     <div className="container header mt-5">

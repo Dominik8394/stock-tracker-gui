@@ -9,3 +9,12 @@
 table tbody td {
     text-align: center
 }
+
+table thead tr {
+    text-align: center;
+}
+
+table {
+    table-layout: fixed;
+    color: #EEEDF0;
+}
