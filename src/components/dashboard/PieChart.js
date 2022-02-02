@@ -3,8 +3,6 @@ import { Pie } from 'react-chartjs-2';
 
 const createPortfolioShares = (stocks) => {
 
-    console.log("Initial state props: ", stocks);
-
     /* array that holds a stock and its partial share */
     let portfolio = [];
 
@@ -36,7 +34,6 @@ const createPortfolioShares = (stocks) => {
             if (!seen.includes(NAME)) {
                 if (AMOUNT > 0) {
                     share = (AMOUNT / portfolioSize) * 100;
-                    // console.log(`Calculated share ${share} for ${NAME}`);
                     let newShare = {
                         name: NAME,
                         amount: AMOUNT,
@@ -86,12 +83,10 @@ const PieChart = ({ stocks }) => {
 
     useEffect(() => {
         setPortfolio(() => createPortfolioShares(stocks));
-        console.log("Portfolio: ", portfolio)
     }, [stocks]);
 
     useEffect(() => {
         setLabels(() => createLabels(portfolio));
-        console.log("Labels in PieChart: ", labels);
     }, [portfolio]);
 
     const data = {

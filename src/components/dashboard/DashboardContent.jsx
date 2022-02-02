@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Bootstrap imports
-import { Alert, Container } from 'react-bootstrap';
+import { Alert, Container, Button } from 'react-bootstrap';
 import './DashboardContent.css';
 
 // React router imports
@@ -16,37 +16,6 @@ const DashboardContent = ({ stocks, logoutHandler }) => {
 
     let btn = null;
     let info = null;
-    console.log("Stocks prop >>", stocks);
-
-    const data = [
-        {
-            isin: 12131313131,
-            name: 'AT&T',
-            price: 22.23,
-            boughtAt: new Date().toISOString().slice(0, 10),
-            amount: 2,
-            transaction: 1.00,
-            total: 45.23
-        },
-        {
-            isin: 12131313131,
-            name: 'AT&T',
-            price: 22.23,
-            boughtAt: new Date().toISOString().slice(0, 10),
-            amount: 2,
-            transaction: 1.00,
-            total: 45.23
-        },
-        {
-            isin: 12131313131,
-            name: 'AT&T',
-            price: 22.23,
-            boughtAt: new Date().toISOString().slice(0, 10),
-            amount: 2,
-            transaction: 1.00,
-            total: 45.23
-        }
-    ]
 
     return (
         <React.Fragment>
@@ -54,28 +23,31 @@ const DashboardContent = ({ stocks, logoutHandler }) => {
             justify-content-center flex-row" style={{ "maxWidth": "100%" }}>
 
                 <div className="stocks-view">
-                    <StocksTable data={stocks} />
 
-                    {
+                    <StocksTable data={stocks} />
+                    {/* {
                         stocks ?
                             (
-                                btn = <Link className="btn-add btn-primary btn mb-5" role="button" to="/new-entry">Hinzufügen</Link>
-                            ) : btn
-                    }
-                <div className="d-flex align-items-center justify-content-between flex-row metrics-container">
-                    <div className="d-flex align-items-center justify-content-center vis-container">
-                        {
-                            (stocks.length <= 0) ?
-                                (
-                                    info = <Alert variant="warning" className="text-center">
-                                        Leider liegen keine Daten vor.
-                                    </Alert>
-                                )
-                                    : <BarChart />
-                        }
-                    </div>
+                            btn = <Link className="btn-add btn-primary btn mb-5" role="button" to="/new-entry">Hinzufügen</Link>
 
-                    <div className="d-flex align-items-center justify-content-center overview-container">
+                    ) : (
+
+                    )
+                    } */}
+                    <div className="d-flex align-items-center justify-content-between flex-row metrics-container">
+                        <div className="d-flex align-items-center justify-content-center vis-container">
+                            {
+                                (stocks.length <= 0) ?
+                                    (
+                                        info = <Alert variant="warning" className="text-center">
+                                            Leider liegen keine Daten vor.
+                                        </Alert>
+                                    )
+                                    : <BarChart />
+                            }
+                        </div>
+
+                        <div className="d-flex align-items-center justify-content-center overview-container">
                             {
                                 (stocks.length <= 0) ?
                                     (
@@ -85,8 +57,8 @@ const DashboardContent = ({ stocks, logoutHandler }) => {
                                     )
                                     : <PieChart stocks={stocks} />
                             }
+                        </div>
                     </div>
-                </div>
                 </div>
 
 

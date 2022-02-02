@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useHistory } from 'react-router-dom';
 import ErrorView from './ErrorView';
+import Loading from './Loading';
 import DashboardContent from './DashboardContent';
 
 import { getStockInformationByUser } from '../api/StocksHttp';
@@ -24,7 +25,6 @@ const Dashboard = () => {
                 const response = await getStockInformationByUser(currentUser.email);
                 setPending(false);
                 setStockData(response);
-                console.log(`Response data ${JSON.stringify(response)}`);
             })();
 
         } catch (err) {
@@ -32,6 +32,7 @@ const Dashboard = () => {
             console.info(err);
         }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     /*
@@ -54,9 +55,14 @@ const Dashboard = () => {
                 <DashboardContent stocks={stockData} logoutHandler={handleLogout} />
             </React.Fragment>
             :
-            <React.Fragment>
-                <ErrorView errorMsg={error} />
-            </React.Fragment>
+            error ?
+                <>
+                    <ErrorView errorMsg={error} />
+                </>
+                :
+                <React.Fragment>
+                    <Loading />
+                </React.Fragment>
     );
 }
 
