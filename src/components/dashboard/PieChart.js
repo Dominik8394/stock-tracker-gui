@@ -114,7 +114,16 @@ const PieChart = ({ stocks }) => {
 
     return (
         <div className="d-flex justify-content-around align-items-center barchart-container">
-            <Pie data={data} style={{ "maxHeight": "100%", "maxWidth": "100%" }} />
+            <Pie data={data} options={{
+                plugins: {
+                    title: {
+                        display: true,
+                        text: "Aktienaufteilung",
+                        font: {size: 18, style: 'normal', weight: 'normal'},
+                        color: 'white'
+                    }
+                }
+            }} style={{ "maxHeight": "100%", "maxWidth": "100%" }} />
         </div>
     )
 }

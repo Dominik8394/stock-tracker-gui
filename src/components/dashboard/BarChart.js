@@ -47,7 +47,16 @@ const Barchart = () => {
 
     return (
         <div className="d-flex justify-content-around align-items-center barchart-container">
-            <Bar data={data} style={{"maxHeight": "100%", "maxWidth": "100%"}}/>
+            <Bar data={data}  options={{
+                plugins: {
+                    title: {
+                        display: true,
+                        text: "Gesamtinvestment seit Beginn",
+                        font: {size: 18, style: 'normal', weight: 'normal'},
+                        color: 'white'
+                    }
+                }
+            }} style={{"maxHeight": "100%", "maxWidth": "100%"}}/>
         </div>
     );
 }

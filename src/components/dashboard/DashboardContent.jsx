@@ -23,7 +23,10 @@ const DashboardContent = ({ stocks, logoutHandler }) => {
             justify-content-center flex-row" style={{ "maxWidth": "100%" }}>
 
                 <div className="stocks-view">
-
+                    <div className="container header mt-5">
+                        <h3>Füge eine weitere Transaktion deinem Dashboard hinzu!</h3>
+                        <Link className="btn-add btn-primary btn mb-5" style={{maxWidth: "30%"}} role="button" to="/new-entry">Hinzufügen</Link>
+                    </div>
                     <StocksTable data={stocks} />
                     {/* {
                         stocks ?
