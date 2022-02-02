@@ -35,20 +35,19 @@ const Barchart = () => {
 
     const options = {
         scales: {
-            yAxes: [
-                {
+            yAxes: [{
                     ticks: {
-                        beginAtZero: true,
-                    },
-                },
-            ],
+                        suggestedMin: 0,
+                        beginAtZero: true
+                    }
+                }],
         },          
     };
 
 
     return (
         <div className="d-flex justify-content-around align-items-center barchart-container">
-            <Bar data={data} options={options} style={{"max-height": "100%", "max-width": "100%"}}/>
+            <Bar data={data} style={{"maxHeight": "100%", "maxWidth": "100%"}}/>
         </div>
     );
 }

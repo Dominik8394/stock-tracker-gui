@@ -5,7 +5,8 @@
 .overview-container, .vis-container {
     height: 100%;
     width: 49%;
-    background-color: #2f3042;
+    background-color: rgba(47, 48, 66, .5);
+    border: 1px solid #e3e3e322;
 }
 
 .btn-add {

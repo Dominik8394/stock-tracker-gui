@@ -23,9 +23,6 @@ const createPortfolioShares = (stocks) => {
         });
     }
 
-    console.log("Portfolio size: ", portfolioSize);
-
-
     if (stocks) {
         stocks.forEach((stock) => {
             let NAME = stock.title || stock.name;
@@ -44,7 +41,6 @@ const createPortfolioShares = (stocks) => {
                     seen.push(NAME);
                 }
             } else {
-                console.log("I have seen theses stocks: ", seen);
                 portfolio.forEach((knownStock) => {
                     if (knownStock.title || knownStock.name === NAME) {
                         share = ((knownStock.amount + AMOUNT) / portfolioSize) * 100;

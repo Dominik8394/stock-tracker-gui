@@ -25,16 +25,16 @@ const StocksTable = (props) => {
 
             <React.Fragment>
                 <div className="table-container mt-3">
-                    <Table responsive striped bordered hover variant="dark">
+                    <Table responsive bordered hover variant="dark">
                         <thead>
                             <tr>
                                 <th>ISIN</th>
                                 <th>Name</th>
-                                <th>Price</th>
-                                <th>Bought At</th>
-                                <th>Amount</th>
-                                <th>Transaction Costs</th>
-                                <th>Total</th>
+                                <th>Kurswert</th>
+                                <th>Gekauft am</th>
+                                <th>Anteile</th>
+                                <th>Transaktionskosten</th>
+                                <th>Gesamtkosten</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,11 +43,11 @@ const StocksTable = (props) => {
                                     <tr key={index}>
                                         <td>{item.isin}</td>
                                         <td>{item.name || item.title}</td>
-                                        <td>{item.price}</td>
-                                        <td>{item.boughtAt}</td>
-                                        <td>{item.amount}</td>
-                                        <td>{item.transaction}</td>
-                                        <td>{item.totalAmount}</td>
+                                        <td>{item.price} €</td>
+                                        <td>{item.boughtAt.substring(0, 10)}</td>
+                                        <td><div className="badge bg-secondary" style={{ width: "50%" }}>{item.amount}</div></td>
+                                        <td>{item.transaction} €</td>
+                                        <td>{item.totalAmount} €</td>
                                     </tr>
                                 ))
                             }
