@@ -115,7 +115,9 @@ const NewStockEntry = () => {
                             <Form.Group>
                                 {/* <label>Date</label>
                                 <input key={3} onChange={onChange} name="Date" value={values.Date} type="date" /> */}
-                                <TextField required fullWidth id="standard-basic" label="Datum des Erwerbs" variant="standard" />
+                                {/* <input key={3} onChange={onChange} name="Date" placeholder={values.Date} type="date" /> */}
+                                <Form.Control type="date" default={new Date()} />
+                                {/* <TextField required fullWidth id="standard-basic" label="Datum des Erwerbs" variant="standard" /> */}
                             </Form.Group>
                             <Form.Group>
                                 {/* <label>Amount</label>

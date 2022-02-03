@@ -31,8 +31,6 @@ const Dashboard = () => {
             setError(err);
             console.info(err);
         }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     /*
