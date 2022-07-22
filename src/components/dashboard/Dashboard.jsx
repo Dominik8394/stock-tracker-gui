@@ -5,7 +5,7 @@ import ErrorView from './ErrorView';
 import Loading from './Loading';
 import DashboardContent from './DashboardContent';
 
-import { getStockInformationByUser } from '../api/StocksHttp';
+import { getStockInformationByUser, getStockInformation } from '../api/StocksHttp';
 
 const Dashboard = () => {
 
@@ -22,7 +22,8 @@ const Dashboard = () => {
         setPending(true);
         try {
             (async function fetchData() {
-                const response = await getStockInformationByUser(currentUser.email);
+                // const response = await getStockInformationByUser(currentUser.email);
+                const response = await getStockInformation();
                 setPending(false);
                 setStockData(response);
             })();

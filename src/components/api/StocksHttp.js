@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'https://' + 'stocktracker-api.herokuapp.com';
+const url = 'http://localhost:3001';
 
 /**
  * Retrieves all stock information from the server.
@@ -8,7 +8,7 @@ const url = 'https://' + 'stocktracker-api.herokuapp.com';
  * @returns array of stock data
  */
 export const getStockInformation = () => {
-    return axios.get(url + '/api/stocks')
+    return axios.get('http://localhost:3001/api/stocks')
         .then(res => {
             return res.data;
         });
