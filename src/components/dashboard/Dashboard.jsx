@@ -22,10 +22,11 @@ const Dashboard = () => {
         setPending(true);
         try {
             (async function fetchData() {
-                // const response = await getStockInformationByUser(currentUser.email);
-                const response = await getStockInformation();
+                const response = await getStockInformationByUser(currentUser.email);
+                // const response = await getStockInformation();
                 setPending(false);
                 setStockData(response);
+                console.log(stockData);
             })();
 
         } catch (err) {

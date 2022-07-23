@@ -17,27 +17,21 @@ const DashboardContent = ({ stocks, logoutHandler }) => {
     let btn = null;
     let info = null;
 
+    console.log(stocks);
+
     return (
-        <React.Fragment>
+        <>
             <Container className="d-flex align-items-center 
             justify-content-center flex-row" style={{ "maxWidth": "75%", "minWidth": "0%" }}>
 
                 <div className="stocks-view">
                     <div className="container header mt-5">
                         <h3>Füge eine weitere Transaktion deinem Dashboard hinzu!</h3>
-                        <Link className="btn-add btn-primary btn mb-5" style={{maxWidth: "30%"}} role="button" to="/new-entry">Hinzufügen</Link>
+                        <Link className="btn-add btn-primary btn mb-5" style={{ maxWidth: "30%" }} role="button" to="/new-entry">Hinzufügen</Link>
                     </div>
                     <StocksTable data={stocks} />
-                    {/* {
-                        stocks ?
-                            (
-                            btn = <Link className="btn-add btn-primary btn mb-5" role="button" to="/new-entry">Hinzufügen</Link>
 
-                    ) : (
-
-                    )
-                    } */}
-                    <div className="d-flex align-items-center justify-content-between flex-row metrics-container">
+                    <div className="d-flex align-items-center justify-content-between flex-row metrics-container mb-5">
                         <div className="d-flex align-items-center justify-content-center vis-container">
                             {
                                 (stocks.length <= 0) ?
@@ -63,16 +57,8 @@ const DashboardContent = ({ stocks, logoutHandler }) => {
                         </div>
                     </div>
                 </div>
-
-
-                {/* <div>
-                    <div className="w-100 text-center mt-2">
-                        <Button onClick={logoutHandler}>Log Out</Button>
-                        <Link className="btn btn-primary ml-2" role="button" to="/new-entry">Neuer Eintrag </Link>
-                    </div>
-                </div> */}
             </Container>
-        </React.Fragment>
+        </>
     );
 }
 

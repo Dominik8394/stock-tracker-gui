@@ -14,16 +14,16 @@ const StocksTable = (props) => {
 
     return (
         !props.data ?
-            <React.Fragment>
+            <>
                 <Alert variant="info" className="text-center">
                     Leider verfügen wir derzeit über keine Informationen zu
                     deinem Bestand. Füge gleich deine erste <Link to="/new-entry">Transaktion</Link> hinzu!
                 </Alert>
-            </React.Fragment>
+            </>
 
             :
 
-            <React.Fragment>
+            <>
                 <div className="table-container mt-3">
                     <Table responsive bordered hover variant="dark">
                         <thead>
@@ -33,8 +33,8 @@ const StocksTable = (props) => {
                                 <th>Kurswert</th>
                                 <th>Gekauft am</th>
                                 <th>Anteile</th>
-                                <th>Transaktionskosten</th>
-                                <th>Gesamtkosten</th>
+                                <th>TSX</th>
+                                <th>Kosten</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,7 +54,7 @@ const StocksTable = (props) => {
                         </tbody>
                     </Table>
                 </div>
-            </React.Fragment>
+            </>
 
     );
 }

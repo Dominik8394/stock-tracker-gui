@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 // Bootstrap imports
 import { Card, Button, Form } from 'react-bootstrap';
@@ -11,26 +11,23 @@ import './NewStockEntry.css';
 // MaterialUI imports
 import Snackbar from '@material-ui/core/Snackbar';
 
-// Context imports
+// Context imports˚
 import { useAuth } from '../../contexts/AuthContext';
 
 // Component imports
 import { createStockInformation } from '../api/StocksHttp';
 
-const useStyles = makeStyles({
-    root: {
-        color: "white",
-        input: {
-            color: "#FFF",
-        }
-    }
-});
-
 const NewStockEntry = () => {
 
-    const classes = useStyles();
+    const isinRef = useRef(null);
+    const nameRef = useRef(null);
+    const dateRef = useRef(null);
+    const amountRef = useRef(null);
+    const priceRef = useRef(null);
+    const totalRef = useRef(null);
+    const tsxRef = useRef(null);
 
-    console.log("rendering...");
+    console.log("rendering NewStockEntry Component ...");
 
     /* Setting up states */
     const [error, setError] = useState('');
@@ -91,9 +88,19 @@ const NewStockEntry = () => {
         e.preventDefault();
         setValues({ ...values, [e.target.name]: e.target.value })
     }
+    
+    const logRefContent = () => {
+        console.log(isinRef.current.value);
+        console.log(nameRef.current.value);
+        console.log(dateRef.current.value);
+        console.log(tsxRef.current.value);
+        console.log(amountRef.current.value);
+        console.log(totalRef.current.value);
+        console.log(priceRef.current.value);
+    }
 
     return (
-        <React.Fragment>
+        <>
             <div className="d-flex justify-content-center mt-4">
                 <Card className="card-bg-cm" style={{ width: '650px' }}>
                     <Card.Body style={{ width: '65%', margin: 'auto' }}>
@@ -103,46 +110,37 @@ const NewStockEntry = () => {
 
                         <Form onSubmit={handleSubmit}>
                             <Form.Group>
-                                {/* <label>ISIN</label> */}
-                                {/* <input key={1} onChange={onChange} name="ISIN" value={values.ISIN} type="number" /> */}
-                                <TextField required fullWidth id="standard-basic" label="ISIN" />
+                                <label>ISIN</label>
+                                <input key={1} name="ISIN" ref={isinRef} type="number" />
                             </Form.Group>
                             <Form.Group>
-                                {/* <label>Name</label>
-                                <input key={2} onChange={onChange} name="Name" value={values.Name} type="text" /> */}
-                                <TextField required fullWidth id="standard-basic" label="Name der Aktie" variant="standard" />
+                                <label>Name</label>
+                                <input key={2} name="Name" ref={nameRef} type="text" />
                             </Form.Group>
                             <Form.Group>
-                                {/* <label>Date</label>
-                                <input key={3} onChange={onChange} name="Date" value={values.Date} type="date" /> */}
-                                {/* <input key={3} onChange={onChange} name="Date" placeholder={values.Date} type="date" /> */}
-                                <Form.Control type="date" default={new Date()} />
-                                {/* <TextField required fullWidth id="standard-basic" label="Datum des Erwerbs" variant="standard" /> */}
+                                <label>Date</label>
+                                <input key={3} name="Date" ref={dateRef} type="date" />
                             </Form.Group>
                             <Form.Group>
-                                {/* <label>Amount</label>
-                                <input key={4} onChange={onChange} name="Amount" value={values.Amount} type="number" /> */}
-                                <TextField required fullWidth id="standard-basic" label="Anzahl" variant="standard" />
+                                <label>Amount</label>
+                                <input key={4}  name="Amount" ref={amountRef} type="number" />
                             </Form.Group>
                             <Form.Group>
-                                {/* <label>Price</label>
-                                <input key={5} onChange={onChange} name="Price" value={values.Price} type="number" /> */}
-                                <TextField required fullWidth id="standard-basic" label="Kurs zum Zeitpunkt des Erwerbs" variant="standard" />
+                                <label>Price</label>
+                                <input key={5} name="Price" ref={priceRef} type="number" />
                             </Form.Group>
                             <Form.Group>
-                                {/* <label>Transaction Costs</label>
-                                <input key={6} onChange={onChange} name="Transaction" value={values.Transaction} type="number" /> */}
-                                <TextField required fullWidth id="standard-basic" label="Transaktionskosten" variant="standard" />
+                                <label>Transaction Costs</label>
+                                <input key={6} name="Transaction" ref={tsxRef} type="number" />
                             </Form.Group>
                             <Form.Group>
-                                {/* <label>Total Costs</label>
-                                <input key={7} onChange={onChange} name="Total" value={values.Total} type="number" /> */}
-                                <TextField color="secondary" required fullWidth id="standard-basic" label="Kostem Gesamt" variant="standard" />
+                                <label>Total Costs</label>
+                                <input key={7} name="Total" ref={totalRef} type="number" />
                             </Form.Group>
                             <Card.Footer style={{ textAlign: 'center', background: 'none', borderTop: 'none' }} >
                                 <div className="d-flex align-items-center justify-content-between">
                                     <Button onClick={goBack} className="btn-w-cm btn-secondary">Zurück</Button>
-                                    <Button disabled={loading} className="btn-w-cm" type="submit">Erstellen</Button>
+                                    <Button onClick={logRefContent} disabled={loading} className="btn-w-cm" type="submit">Erstellen</Button>
                                 </div>
                             </Card.Footer>
                         </Form>
@@ -170,9 +168,8 @@ const NewStockEntry = () => {
                     >
                     </Snackbar>
                 }
-
             </div>
-        </React.Fragment>
+        </>
     );
 }
 
